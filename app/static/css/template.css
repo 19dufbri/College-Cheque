@@ -1,3 +1,20 @@
 body {
 	font-family: Helvetica, sans-serif;
+	margin: 0px;
+}
+
+header {
+	background: #3a393d;
+	color: white;
+	width: 100%;
+	padding: auto 0.5rem;
+	box-sizing: border-box;
+	overflow: auto;
+	-webkit-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.75);
+	box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.75);
+}
+
+header h1 {
+	margin: 0.1rem;
 }

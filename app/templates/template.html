@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template.css') }}">
+
 		<!-- Page Specific Styles -->
 		{% block header %}
 		{% endblock %}
 	</head>
 	<body>
+		<header>
+			<h1>Product Name <small>Cool Story Bro</small></h1>
+		</header>
+
 		{% block body %}
 		{% endblock %}
+
+		<script type="text/javascript" src="{{ url_for('static', filename='js/template.js') }}"></script>
 	</body>
 </html>
