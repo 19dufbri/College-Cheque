@@ -23,9 +23,9 @@ header {
 	padding: .75rem .75rem;
 	box-sizing: border-box;
 	overflow: auto;
-	-webkit-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.9);
-	-moz-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.9);
-	box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.9);
+	-webkit-box-shadow: 0px -10px 10px 15px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px -10px 10px 15px rgba(0,0,0,0.5);
+	box-shadow: 0px -10px 10px 15px rgba(0,0,0,0.5);
 }
 
 header a {

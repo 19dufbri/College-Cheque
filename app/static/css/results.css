@@ -16,6 +16,10 @@
 	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 }
 
+#results {
+	margin-top: 1rem;
+}
+
 balh {
 	border-bottom: 1px solid grey;
 	border-right: 1px solid grey;
