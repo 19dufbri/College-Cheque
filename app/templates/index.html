@@ -12,7 +12,7 @@
                 <div id="hero-content" class="center-horizontal">
                     <h3>Product Name</h3>
                     <p>Enter description here! Bladadladnaw.</p>
-                    <p><a href="#" class="btn btn-primary btn-large">Get started! »</a></p>
+                    <p><a href="#forum-wrapper" class="btn btn-primary btn-large">Get started! »</a></p>
                 </div>
               </div>
             </div>
@@ -20,26 +20,92 @@
         </section>
     </div>
     <div id="forum-wrapper" class="container-fluid center-horizontal">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div id="carouselSlides" class="carousel slide" data-interval="false" data-ride="false">
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="input-wrapper">
-                  <h5>What is your degree type?</h5>
+            <div class="carousel-item active" data-step="1">
+              <div class="card input-card">
+                  <div class="card-body">
+                    <h5 class="card-title">What is the degree?</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <form>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                      </div>
+                    </form>
+                    <a id="nextBtn1" href="#" data-target="#carouselSlides" data-slide-to="1" class="btn btn-primary">Next</a>
+                  </div>
               </div>
             </div>
-            <div class="carousel-item">
-              <div class="input-wrapper">
-                  <h5>How many years?</h5>
+            <div class="carousel-item" data-step="2">
+              <div class="card input-card">
+                  <div class="card-body">
+                    <h5 class="card-title">How many years?</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <form>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                      </div>
+                    </form>
+                    <div class="buttons-wrapper">
+                        <a id="backBtn2" href="#" data-target="#carouselSlides" data-slide-to="0" class="btn btn-primary">Back</a>
+                        <a id="nextBtn2" href="#" data-target="#carouselSlides" data-slide-to="2" class="btn btn-primary">Next</a>
+                    </div>
+                  </div>
               </div>
             </div>
-            <div class="carousel-item">
-              <div class="input-wrapper">
-                  <h5>What is your race?</h5>
+            <div class="carousel-item" data-step="3">
+              <div class="card input-card">
+                  <div class="card-body">
+                    <h5 class="card-title">What is your income bracket?</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <form>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                      </div>
+                    </form>
+                    <div class="buttons-wrapper">
+                        <a id="backBtn3" href="#" data-target="#carouselSlides" data-slide-to="1" class="btn btn-primary">Back</a>
+                        <a id="submitBtn" href="#" data-target="#carouselSlides" class="btn btn-primary">Submit</a>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>
 
+    </div>
+    <div class="progress">
+        <div id="progBar" class="progress-bar w-0" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}

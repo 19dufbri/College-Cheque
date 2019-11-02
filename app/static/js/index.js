@@ -1,7 +1,21 @@
-$('#id').on('click', function (e) {
+$('#nextBtn1').on('click', function (e) {
+     $(".progress-bar").css('width', '25%');
+})
 
-     //your awesome code here
+$('#nextBtn2').on('click', function (e) {
+     $(".progress-bar").css('width', '50%');
+})
 
+$('#nextBtn3').on('click', function (e) {
+     $(".progress-bar").css('width', '75%');
+})
+
+$('#backBtn2').on('click', function (e) {
+     $(".progress-bar").css('width', '0%');
+})
+
+$('#backBtn3').on('click', function (e) {
+     $(".progress-bar").css('width', '25%');
 })
 
 // Activate Carousel
@@ -16,3 +30,4 @@ $(".item").click(function(){
 $(".left").click(function(){
   $("#myCarousel").carousel("prev");
 });
+

@@ -37,7 +37,7 @@
 #forum-wrapper {
     margin-top: 100px;
     width: 100%;
-    margin-bottom: 200px;
+    margin-bottom: 60px;
 }
 
 .input-wrapper {
@@ -54,9 +54,42 @@
 }
 
 .input-wrapper {
-    border: 2px solid red;
+    border: 2px solid gray;
     border-radius: 5px;
     margin: auto;
     height: 300px;
     width: 800px;
+}
+
+.input-card {
+    width: 70%;
+    margin: auto;
+}
+
+.prompt {
+    margin: 10px;
+}
+
+.progress {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    margin-bottom: 200px;
+}
+
+.progress-bar {
+    width: 0%;
+    -webkit-transition: width .6s linear;
+    transition: width .6s linear;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#nextBtn1 {
+    float: right;
 }
