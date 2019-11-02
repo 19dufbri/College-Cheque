@@ -15,16 +15,18 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% block header %}
-		<header>
-			<a href="/"><i class="fas fa-university"></i> Product <small>Cool Story</small></a>
-		</header>
-		{% endblock %}
+		<section id="site">
+			{% block header %}
+			<header>
+				<a href="/"><i class="fas fa-university"></i> Product <small>Cool Story</small></a>
+			</header>
+			{% endblock %}
 
-		{% block body %}
-		{% endblock %}
+			{% block body %}
+			{% endblock %}
 
-		<!-- TODO: Font awesome attrib -->
-		<script type="text/javascript" src="{{ url_for('static', filename='js/template.js') }}"></script>
+			<!-- TODO: Font awesome attrib -->
+			<script type="text/javascript" src="{{ url_for('static', filename='js/template.js') }}"></script>
+		</section>
 	</body>
 </html>

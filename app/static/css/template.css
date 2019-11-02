@@ -1,6 +1,19 @@
 body {
 	font-family: Helvetica, sans-serif;
 	margin: 0px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	min-height: 100vh;
+}
+
+html {
+	scrollbar-width: thin;
+}
+
+#site {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 header {
@@ -19,12 +32,16 @@ header a {
 	margin: 0.1rem;
 	font-style: italic;
 	font-size: 1.5rem;
-	font-weight: 300;
+	color: white;
+	text-decoration: none;
+}
+
+header a:hover {
+	font-style: italic;
 	color: white;
 	text-decoration: none;
 }
 
 header a small {
 	font-size: 1rem;
-	font-weight: 500; 
 }
