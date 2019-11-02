@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/template.css') }}">
+		<link async rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 		<!-- Page Specific Styles -->
 		{% block header %}
@@ -9,12 +10,13 @@
 	</head>
 	<body>
 		<header>
-			<h1>Product Name <small>Cool Story Bro</small></h1>
+			<a href="/"><i class="fas fa-university"></i> Product <small>Cool Story</small></a>
 		</header>
 
 		{% block body %}
 		{% endblock %}
 
+		<!-- TODO: Font awesome attrib -->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/template.js') }}"></script>
 	</body>
 </html>

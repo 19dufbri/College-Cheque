@@ -7,14 +7,24 @@ header {
 	background: #3a393d;
 	color: white;
 	width: 100%;
-	padding: auto 0.5rem;
+	padding: .75rem .75rem;
 	box-sizing: border-box;
 	overflow: auto;
-	-webkit-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.75);
-	-moz-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.75);
-	box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.75);
+	-webkit-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.9);
+	-moz-box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.9);
+	box-shadow: inset 0px -15px 10px -10px rgba(0,0,0,0.9);
 }
 
-header h1 {
+header a {
 	margin: 0.1rem;
+	font-style: italic;
+	font-size: 1.5rem;
+	font-weight: 300;
+	color: white;
+	text-decoration: none;
+}
+
+header a small {
+	font-size: 1rem;
+	font-weight: 500; 
 }
