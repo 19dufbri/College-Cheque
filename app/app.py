@@ -1,3 +1,5 @@
+import plotly.graph_objects as plotly
+import base64
 import csv
 from flask import Flask, render_template, url_for
 app = Flask(__name__)
@@ -47,6 +49,17 @@ def processRow(row):
         tuition["5"] = row["NPT45_PRIV"]
     row["tuition"] = tuition
     return row
+
+def makePie(percents):
+    keys = []
+    props = []
+    for key in percents:
+        keys.append(key)
+        props.append(percents[key])
+    
+    data = plotly.Figure(data=[plotly.Pie(labels=keys, values=props)])
+    chart = base64.b64encode(data.to_image(format="png"))
+    return chart
 
 if __name__ == '__main__':
     app.run(debug=False)
