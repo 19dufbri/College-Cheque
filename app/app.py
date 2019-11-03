@@ -20,15 +20,15 @@ def initalize():
 
 def processRow(row):
     races = {}
-    races["white"] = row["UGDS_WHITE"]
-    races["black"] = row["UGDS_BLACK"]
-    races["hispanic"] = row["UGDS_HISP"]
-    races["asian"] = row["UGDS_ASIAN"]
-    races["northnative"] = row["UGDS_AIAN"]
-    races["southnative"] = row["UGDS_NHPI"]
-    races["multi"] = row["UGDS_2MOR"]
-    races["nonresident"] = row["UGDS_NRA"] 
-    races["unknown"] = row["UGDS_UNKN"]
+    races["White"] = row["UGDS_WHITE"]
+    races["Black"] = row["UGDS_BLACK"]
+    races["Hispanic"] = row["UGDS_HISP"]
+    races["Asian"] = row["UGDS_ASIAN"]
+    races["American Indian and Alaskan Native"] = row["UGDS_AIAN"]
+    races["Native Hawiian and Pacific Islander"] = row["UGDS_NHPI"]
+    races["Two or More"] = row["UGDS_2MOR"]
+    races["Nonresident Alien"] = row["UGDS_NRA"] 
+    races["Unkown"] = row["UGDS_UNKN"]
     row["racepercent"] = races
     tuition = {}
     if row["NPT4_PUB"] != "NULL":
@@ -45,8 +45,8 @@ def processRow(row):
         tuition["3"] = row["NPT43_PRIV"]
         tuition["4"] = row["NPT44_PRIV"]
         tuition["5"] = row["NPT45_PRIV"]
-    row["racepercent"] = tuition
-
+    row["tuition"] = tuition
+    return row
 
 if __name__ == '__main__':
     app.run(debug=False)
