@@ -14,27 +14,26 @@
 <section class="main-site">
 	<section class="container">
 		<form class="form-inline">
-			<div class="ml-auto">
-				<input class="form-control" placeholder="College Name" name="search" />
-				<input class="btn btn-primary" type="submit" value="Search" />
+			<div class="ml-auto" style="display: inline-block">
+				<a id="submitBtn" href="{{ url_for('index') }}" class="btn btn-primary">Back</a>
 			</div>
 		</form>
 		<section id="results">
 			{% for college in results %}
 			<balh class="balh">
 				<section>
-					<h3>{{ college["INSTNM"] | e }} <small>{{ college["STABBR"] | e }}</small></h3>
+					<h3>{{ college["INSTNM"] | e }} <small style="font-size: 0.9em; font-weight: 300;">{{ college["STABBR"] | e }}</small></h3>
 					<div class="d-flex">
 						<div class="col-sm-6">
-							<p>Net Price: <i>${{ college["net"] | e }}</i></p>
+							<h5>Estimated Price for You: <i>${{ college["net"] | e }}</i></h5>
 							<p class="sub">Tuition: <i>${{ college["tuition"] | e }}</i></p>
 							<p class="sub">Pell Grant: <i>{{ college["pell"]| e }}</i>%</p>
 							<p class="sub">Federal Loan: <i>{{ college["loan"]| e }}</i>%</p>
 
 							<br/>
 
-							<p>Median Debt: <i>${{ college["GRAD_DEBT_MDN"] | e }}</i></p>
-							<p>Estimated Debt for You: <i>${{ college["debt"] | e }}</i></p>
+							<h5>Estimated Debt for You: <i>${{ college["debt"] | e }}</i></h5>
+							<p class="sub">Median Debt: <i>${{ college["GRAD_DEBT_MDN"] | e }}</i></p>
 							<p class="sub">1st Year Repayment: <i>{{ college["one"] | e }}</i>%</p>
 							<p class="sub">3rd Year Repayment: <i>{{ college["three"] | e }}</i>%</p>
 							<p class="sub">5th Year Repayment: <i>{{ college["five"] | e }}</i>%</p>
@@ -49,15 +48,19 @@
 							<img class="plt" src="data:image/png;base64,{{ college['picture'] }}"/>
 							
 							<br/>
+							<br/>
 
+							<h5>Estimated Completion Rate: <i>{{ college["estim"] | e }}</i>%</h5>
 							<p>Overall Percent Completion: <i>{{ college["comp"] | e }}</i>%</p>
-							<p><b>Esitmated Completion Rate: <i>{{ college["estim"] | e }}</i>%</b></p>
 							<p>Retention Rate: <i>{{ college["reten"] | e }}</i>%</p>
 						</div>
 					</div>
 				</section>
 			</balh>
 			{% endfor %}
+            <div class="col-sm-6">
+
+            </div>
 		</section>
 	</section>
 </section>

@@ -50,3 +50,7 @@ balh:last-of-type {
 .plt {
 	width: 100%;
 }
+
+.sub {
+	margin-bottom: 0rem;
+}
