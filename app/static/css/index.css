@@ -4,7 +4,8 @@ body {
 
 #splashTitle {
     color: white;
-    font-size: 42px;
+    font-size: 72px;
+    font-family: "Palatino", "Georgia";
 }
 
 #hero-wrapper {
