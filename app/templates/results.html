@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block head %}
-<title>College Search - {{ len(colleges) | e }} Results</title>
+<title>College Search - {{ numres | e }} Results</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/results.css') }}">
 <style>
 	.main-site {

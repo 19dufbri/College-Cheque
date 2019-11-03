@@ -14,24 +14,23 @@ def index():
 
 @app.route('/results')
 def results():
-    name = ""
     results = []
     print(request.cookies.get("college-input-data"));
     jsondata = json.loads(request.cookies.get("college-input-data"))
     for college in finalData:
-        if college["name"] == name:
+        if college["INSTNM"] in jsondata["collegeNames"]:
             results.append(getPersonalData(jsondata, college))
-    return render_template("results.html", results=results)
+    return render_template("results.html", numres=len(results), results=results)
 
 def getPersonalData(json, college):
     college["picture"] = makePie(college["racepercent"]).decode('utf-8')
     
     if json["degree"] == 1 or json["degree"] == 2:
-        college["comp"] = college['C150_L4']
-        college["reten"] = college['RET_FTL4']
+        college["comp"] = college["C150_L4"]
+        college["reten"] = college["RET_FTL4"]
     else:
-        college["comp"] = college['C150_4']
-        college["reten"] = college['RET_FT4']
+        college["comp"] = college["C150_4"]
+        college["reten"] = college["RET_FT4"]
 
     college["net"] = college["tuition"][json["income"]]
 
@@ -310,7 +309,7 @@ def getPersonalData(json, college):
 
 
 def initalize():
-    with open('data.csv') as csvDataFile:
+    with open('app/data.csv') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             finalData.append(processRow(row))
@@ -363,3 +362,5 @@ def makePie(percents):
 
 if __name__ == '__main__':
     app.run(debug=False)
+
+initalize()
