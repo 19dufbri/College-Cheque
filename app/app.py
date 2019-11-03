@@ -34,7 +34,7 @@ def autocomplete():
 
 
 def getPersonalData(json, college):
-    college["picture"] = makePie(college["racepercent"]).decode('utf-8')
+    college["picture"] = makePie(college["racepercent"])
     
     if json["degree"] == "1" or json["degree"] == "2":
         college["comp"] = int(100 * getFloat(college, "C150_L4"))
