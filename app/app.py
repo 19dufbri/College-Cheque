@@ -34,11 +34,11 @@ def processRow(row):
     races["Black"] = row["UGDS_BLACK"]
     races["Hispanic"] = row["UGDS_HISP"]
     races["Asian"] = row["UGDS_ASIAN"]
-    races["Indian"] = row["UGDS_AIAN"]
+    races["Am. Indian"] = row["UGDS_AIAN"]
     races["Hawiian/PI"] = row["UGDS_NHPI"]
     races["Two or More"] = row["UGDS_2MOR"]
-    races["Nonresident Alien"] = row["UGDS_NRA"] 
-    races["Unkown"] = row["UGDS_UNKN"]
+    races["Nonresident"] = row["UGDS_NRA"] 
+    races["Unknown"] = row["UGDS_UNKN"]
     row["racepercent"] = races
     tuition = {}
     if row["NPT4_PUB"] != "NULL":
