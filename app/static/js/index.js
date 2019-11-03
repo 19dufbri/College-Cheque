@@ -34,8 +34,9 @@ $(function(ready) {
         $('#degree').val(parsedCookie.degree);
         $('#collegeName1').val(parsedCookie.collegeNames[0]);
         for(let i = 1; i < parsedCookie.collegeNames.length; i++) {
-            $("#collegeInputs").append('<input type="text" class="form-control collegeName" id="collegeName' + (i+1) + '" aria-describedby="collegeName" placeholder="Enter college name">')
+            //$("#collegeInputs").append('<input type="text" class="form-control collegeName" id="collegeName' + (i+1) + '" aria-describedby="collegeName" placeholder="Enter college name">')
             $('#collegeName' + (i+1)).val(parsedCookie.collegeNames[i]);
+            $('#collegeName' + (i+1)).css("display","inline-block");
         }
         numColleges = parsedCookie.collegeNames.length;
         if(numColleges > 1) {
@@ -74,19 +75,25 @@ $(function(ready) {
 
     $('#addBtn').on('click', function (e) {
         numColleges++;
-        $("#collegeInputs").append('<input type="text" class="form-control collegeName" id="collegeName' + numColleges + '" aria-describedby="collegeName" placeholder="Enter college name">')
+        //$("#collegeInputs").append('<input type="text" class="form-control collegeName" id="collegeName' + numColleges + '" aria-describedby="collegeName" placeholder="Enter college name">')
+        $("#collegeName" + numColleges).css("display","inline-block");
         $('#submitBtn').addClass("disabled");
         if(numColleges > 1) {
             $('#remBtn').css('display', 'inline-block');
+        } else if(numColleges >= 10) {
+            $('#addBtn').css('display', 'none');
         }
         updateBtnSubmit();
     })
 
     $('#remBtn').on('click', function (e) {
-        $("#collegeName" + numColleges).remove();
+        //$("#collegeName" + numColleges).remove();
+        $("#collegeName" + numColleges).css("display","none");
         numColleges--;
         if(numColleges == 1) {
             $('#remBtn').css('display', 'none');
+        } else {
+            $('#addBtn').css('display', 'inline-block');
         }
         updateBtnSubmit();
     })
@@ -115,7 +122,7 @@ $(function(ready) {
             "degree": degree,
             "collegeNames": collegeNames,
         }
-        setCookie("college-input-data",JSON.stringify(jsonObj),10);
+        setCookie("college-input-data",JSON.stringify(jsonObj),60);
     })
 
     function setCookie(c_name,value,expireminutes) {

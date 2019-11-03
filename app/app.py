@@ -5,6 +5,7 @@ from flask import Flask, render_template, url_for, request, jsonify
 import matplotlib.pyplot as plt
 from io import BytesIO
 from flask import jsonify
+import numpy as np
 
 app = Flask(__name__)
 
@@ -33,7 +34,7 @@ def autocomplete():
 
 
 def getPersonalData(json, college):
-    college["picture"] = makePie(college["racepercent"])
+    college["picture"] = makePie(college["racepercent"]).decode('utf-8')
     
     if json["degree"] == "1" or json["degree"] == "2":
         college["comp"] = int(100 * getFloat(college, "C150_L4"))
@@ -367,7 +368,9 @@ def makePie(dict):
     for k, v in dict.items():
         labels.append(k)
         percents.append(v)
-    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
+
+
+    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=1.35)
     # draw circle
     centre_circle = plt.Circle((0, 0), 0.70, fc='white')
     fig = plt.gcf()
@@ -391,11 +394,12 @@ def getString(college, field):
         return "N/A"
     return college[field]
 
-def makeScatter():
+def makeScatter(dict1, dict2):
     labels = []
+    avgCost = []
     percents = []
     colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
-    for k, v in dict.items():
+    for k, v in dict1.items():
         labels.append(k)
         percents.append(v)
 
