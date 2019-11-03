@@ -23,7 +23,7 @@
 			{% for college in results %}
 			<balh class="balh">
 				<section>
-					<h3>{{ college["INSTNM"] | e }}<small>{{ college["STABBR"] | e }}</small></h3>
+					<h3>{{ college["INSTNM"] | e }} <small>{{ college["STABBR"] | e }}</small></h3>
 					<div class="d-flex">
 						<div class="col-sm-6">
 							<p>Net Price: <i>${{ college["net"] | e }}</i></p>
