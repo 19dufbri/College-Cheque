@@ -311,7 +311,7 @@ def getPersonalData(json, college):
 
 
 def initalize():
-    with open('app/data.csv') as csvfile:
+    with open('data.csv') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             finalData.append(processRow(row))
@@ -362,9 +362,9 @@ def makePie(percents):
     chart = base64.b64encode(data.to_image(format = "png"))
     return chart
 
+initalize()
+
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
 else:
     application = app
-
-initalize()
