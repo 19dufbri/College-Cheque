@@ -20,12 +20,12 @@
 			</div>
 		</form>
 		<section id="results">
-			{% for college in colleges %}
+			{% for college in results %}
 			<balh class="balh">
 				<section>
 					<h3>{{ college["INSTNM"] | e }}<small>{{ college["STABBR"] | e }}</small></h3>
 					<div class="d-flex">
-						<div class="col-sm-8">
+						<div class="col-sm-6">
 							<p>Net Price: <i>${{ college["net"] | e }}</i></p>
 							<p class="sub">Tuition: <i>${{ college["tuition"] | e }}</i></p>
 							<p class="sub">Pell Grant: <i>{{ college["PCTPELL"]| e }}</i>%</p>
@@ -44,7 +44,7 @@
 
 							<h5>10 Year Median Salary: <i>${{ college["ten"] | e }}</i></h5>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 							<h4>Demographics:</h4>
 							<img src="data:image/png;base64,{{ college['picture'] }}"/>
 							
