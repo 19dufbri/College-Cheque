@@ -370,8 +370,7 @@ def makePie(dict):
         labels.append(k)
         percents.append(v)
 
-
-    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=1.4)
+    patches, texts, misc = plt.pie(percents, colors=colors, autopct='%1.1f%%', startangle=90, pctdistance=1.1)
     # draw circle
     centre_circle = plt.Circle((0, 0), 0.70, fc='white')
     fig = plt.gcf()
@@ -379,7 +378,7 @@ def makePie(dict):
     # Equal aspect ratio ensures that pie is drawn as a circle
     plt.axis('equal')
     plt.tight_layout()
-    plt.show()
+    plt.legend(patches, labels, loc="best")
     buf = BytesIO();
     plt.savefig(buf)
     buf.seek(0)
@@ -406,8 +405,9 @@ def makeScatter(dict1, dict2):
         labels.append(k)
         percents.append(v)
 
-    plt.pie(percents, labels=labels, colors=colors, startangle=90,frame=false)
-    buffer = StringIO();
+    patches, texts = plt.pie(percents, colors=colors, startangle=90,frame=false)
+    plt.legend(patches, labels, loc="best")
+    buffer = BytesIO();
     plt.savefig(buffer, format="jpg")
     buffer.seek(0)
     return base64.b64encode(buffer.read())
@@ -415,6 +415,6 @@ def makeScatter(dict1, dict2):
 initalize()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
 else:
     application = app
