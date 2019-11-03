@@ -10,7 +10,13 @@ def index():
 
 @app.route('/results')
 def results():
-    return render_template("results.html", numResults=5)
+    name = ""
+    results = []
+    for college in finalData:
+        if college["name"] == name:
+            college["picture"] = makePie(college["racepercent"])
+            results.append(college)
+    return render_template("results.html", results=results)
 
 finalData = []
 
@@ -56,7 +62,6 @@ def makePie(percents):
     for key in percents:
         keys.append(key)
         props.append(percents[key])
-    
     data = plotly.Figure(data=[plotly.Pie(labels=keys, values=props)])
     chart = base64.b64encode(data.to_image(format="png"))
     return chart

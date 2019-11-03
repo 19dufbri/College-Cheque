@@ -24,27 +24,20 @@
 			</div>
 		</form>
 		<section id="results">
+			{% for college in colleges %}
 			<balh class="balh">
 				<section>
 					<div class="d-flex">
-						<span class="h3"><i>The</i> Ohio State University</span>
-						<span class="h5 ml-auto">$1,245,000 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> 30% Above</span></span>
+						<span class="h3">{{ college["INSTNM"] | e }}<small>{{ college["STABBR"] | e }}</small></span>
+						<span class="h5 ml-auto">{{ college["tuition"]["0"] | e }}</span>
 					</div>
-					<p>Hello World</p>
+					<div class="d-flex">
+						<div class="col-sm-4">
+						</div>
+					</div>
 				</section>
 			</balh>
-			<balh class="balh">
-				<section>
-					<h3><i>The</i> Ohio State University</h3>
-					<p>Hello World</p>
-				</section>
-			</balh>
-			<balh class="balh">
-				<section>
-					<h3><i>The</i> Ohio State University</h3>
-					<p>Hello World</p>
-				</section>
-			</balh>
+			{% endfor %}
 		</section>
 	</section>
 </section>
