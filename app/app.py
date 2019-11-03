@@ -44,7 +44,205 @@ def getPersonalData(json, college):
     else:
         college["tuition"] = college["TUITIONFEE_PROG"];
 
-    college["pell"]
+    sumelems = 0
+    numelems = 0
+    if json["income"] == 1:
+        numelems += 1
+        sumelems += college["LO_INC_DEBT_MDN"]
+    elif json["income"] == 2 || json["income"] == 3:
+        numelems += 1
+        sumelems += college["MD_INC_DEBT_MDN"]
+    elif json["income"] == 4 || json["income"] == 5:
+        numelems += 1
+        sumelems += college["HI_INC_DEBT_MDN"]
+    if json["dependent"] == "yes":
+        numelems += 1
+        sumelems += college["DEP_DEBT_MDN"]
+    elif json["dependent"] == "no":
+        numelems += 1
+        sumelems += college["IND_DEBT_MDN"]
+    if json["pell"] == "yes":
+        numelems += 1
+        sumelems += college["PELL_DEBT_MDN"]
+    elif json["pell"] == "no":
+        numelems += 1
+        sumelems += college["NOPELL_DEBT_MDN"]
+    if json["sex"] == "male":
+        numelems += 1
+        sumelems += college["MALE_DEBT_MDN"]
+    elif json["sex"] == "female":
+        numelems += 1
+        sumelems += college["FEMALE_DEBT_MDN"]
+    if json["firstGen"] == "yes":
+        numelems += 1
+        sumelems += college["FIRSTGEN_DEBT_MDN"]
+    elif json["firstGen"] == "no":
+        numelems += 1
+        sumelems += college["NOFIRSTGEN_DEBT_MDN"]
+    if numelems == 0:
+        numelems = 1
+        sumelems = college["GRAD_DEBT_MDN"]
+    college["debt"] = sumelems / numelems
+    
+    sumelems = 0
+    numelems = 0
+    if json["income"] == 1:
+        numelems += 1
+        sumelems += college["LO_INC_RPY_1YR_RT"]
+    elif json["income"] == 2 || json["income"] == 3:
+        numelems += 1
+        sumelems += college["MD_INC_RPY_1YR_RT"]
+    elif json["income"] == 4 || json["income"] == 5:
+        numelems += 1
+        sumelems += college["HI_INC_RPY_1YR_RT"]
+    if json["dependent"] == "yes":
+        numelems += 1
+        sumelems += college["DEP_RPY_1YR_RT"]
+    elif json["dependent"] == "no":
+        numelems += 1
+        sumelems += college["IND_RPY_1YR_RT"]
+    if json["pell"] == "yes":
+        numelems += 1
+        sumelems += college["PELL_RPY_1YR_RT"]
+    elif json["pell"] == "no":
+        numelems += 1
+        sumelems += college["NOPELL_RPY_1YR_RT"]
+    if json["sex"] == "male":
+        numelems += 1
+        sumelems += college["MALE_RPY_1YR_RT"]
+    elif json["sex"] == "female":
+        numelems += 1
+        sumelems += college["FEMALE_RPY_1YR_RT"]
+    if json["firstGen"] == "yes":
+        numelems += 1
+        sumelems += college["FIRSTGEN_RPY_1YR_RT"]
+    elif json["firstGen"] == "no":
+        numelems += 1
+        sumelems += college["NOFIRSTGEN_RPY_1YR_RT"]
+    if numelems == 0:
+        numelems = 1
+        sumelems = college["COMPL_RPY_1YR_RT"]
+    college["one"] = sumelems / numelems
+
+    sumelems = 0
+    numelems = 0
+    if json["income"] == 1:
+        numelems += 1
+        sumelems += college["LO_INC_RPY_3YR_RT"]
+    elif json["income"] == 2 || json["income"] == 3:
+        numelems += 1
+        sumelems += college["MD_INC_RPY_3YR_RT"]
+    elif json["income"] == 4 || json["income"] == 5:
+        numelems += 1
+        sumelems += college["HI_INC_RPY_3YR_RT"]
+    if json["dependent"] == "yes":
+        numelems += 1
+        sumelems += college["DEP_RPY_3YR_RT"]
+    elif json["dependent"] == "no":
+        numelems += 1
+        sumelems += college["IND_RPY_3YR_RT"]
+    if json["pell"] == "yes":
+        numelems += 1
+        sumelems += college["PELL_RPY_3YR_RT"]
+    elif json["pell"] == "no":
+        numelems += 1
+        sumelems += college["NOPELL_RPY_3YR_RT"]
+    if json["sex"] == "male":
+        numelems += 1
+        sumelems += college["MALE_RPY_3YR_RT"]
+    elif json["sex"] == "female":
+        numelems += 1
+        sumelems += college["FEMALE_RPY_3YR_RT"]
+    if json["firstGen"] == "yes":
+        numelems += 1
+        sumelems += college["FIRSTGEN_RPY_3YR_RT"]
+    elif json["firstGen"] == "no":
+        numelems += 1
+        sumelems += college["NOFIRSTGEN_RPY_3YR_RT"]
+    if numelems == 0:
+        numelems = 1
+        sumelems = college["GRAD_RPY_3YR_RT"]
+    college["three"] = sumelems / numelems
+
+    sumelems = 0
+    numelems = 0
+    if json["income"] == 1:
+        numelems += 1
+        sumelems += college["LO_INC_RPY_5YR_RT"]
+    elif json["income"] == 2 || json["income"] == 3:
+        numelems += 1
+        sumelems += college["MD_INC_RPY_5YR_RT"]
+    elif json["income"] == 4 || json["income"] == 5:
+        numelems += 1
+        sumelems += college["HI_INC_RPY_5YR_RT"]
+    if json["dependent"] == "yes":
+        numelems += 1
+        sumelems += college["DEP_RPY_5YR_RT"]
+    elif json["dependent"] == "no":
+        numelems += 1
+        sumelems += college["IND_RPY_5YR_RT"]
+    if json["pell"] == "yes":
+        numelems += 1
+        sumelems += college["PELL_RPY_5YR_RT"]
+    elif json["pell"] == "no":
+        numelems += 1
+        sumelems += college["NOPELL_RPY_5YR_RT"]
+    if json["sex"] == "male":
+        numelems += 1
+        sumelems += college["MALE_RPY_5YR_RT"]
+    elif json["sex"] == "female":
+        numelems += 1
+        sumelems += college["FEMALE_RPY_5YR_RT"]
+    if json["firstGen"] == "yes":
+        numelems += 1
+        sumelems += college["FIRSTGEN_RPY_5YR_RT"]
+    elif json["firstGen"] == "no":
+        numelems += 1
+        sumelems += college["NOFIRSTGEN_RPY_5YR_RT"]
+    if numelems == 0:
+        numelems = 1
+        sumelems = college["COMPL_RPY_5YR_RT"]
+    college["five"] = sumelems / numelems
+
+    sumelems = 0
+    numelems = 0
+    if json["income"] == 1:
+        numelems += 1
+        sumelems += college["LO_INC_RPY_7YR_RT"]
+    elif json["income"] == 2 || json["income"] == 3:
+        numelems += 1
+        sumelems += college["MD_INC_RPY_7YR_RT"]
+    elif json["income"] == 4 || json["income"] == 5:
+        numelems += 1
+        sumelems += college["HI_INC_RPY_7YR_RT"]
+    if json["dependent"] == "yes":
+        numelems += 1
+        sumelems += college["DEP_RPY_7YR_RT"]
+    elif json["dependent"] == "no":
+        numelems += 1
+        sumelems += college["IND_RPY_7YR_RT"]
+    if json["pell"] == "yes":
+        numelems += 1
+        sumelems += college["PELL_RPY_7YR_RT"]
+    elif json["pell"] == "no":
+        numelems += 1
+        sumelems += college["NOPELL_RPY_7YR_RT"]
+    if json["sex"] == "male":
+        numelems += 1
+        sumelems += college["MALE_RPY_7YR_RT"]
+    elif json["sex"] == "female":
+        numelems += 1
+        sumelems += college["FEMALE_RPY_7YR_RT"]
+    if json["firstGen"] == "yes":
+        numelems += 1
+        sumelems += college["FIRSTGEN_RPY_7YR_RT"]
+    elif json["firstGen"] == "no":
+        numelems += 1
+        sumelems += college["NOFIRSTGEN_RPY_7YR_RT"]
+    if numelems == 0:
+        numelems = 1
+        sumelems = college["COMPL_RPY_7YR_RT"]
+    college["seven"] = sumelems / numelems
 
     return college
 
