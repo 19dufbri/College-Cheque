@@ -1,6 +1,7 @@
 import plotly.graph_objects as plotly
 import base64
 import csv
+import json
 from flask import Flask, render_template, url_for, request, jsonify
 app = Flask(__name__)
 
@@ -15,10 +16,11 @@ def index():
 def results():
     name = ""
     results = []
-    json = json.loads(request.cookies.get("college-input-data", "{}"))
+    print(request.cookies.get("college-input-data"));
+    jsondata = json.loads(request.cookies.get("college-input-data"))
     for college in finalData:
         if college["name"] == name:
-            results.append(getPersonalData(college))
+            results.append(getPersonalData(jsondata, college))
     return render_template("results.html", results=results)
 
 def getPersonalData(json, college):
