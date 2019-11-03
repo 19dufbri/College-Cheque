@@ -4,7 +4,8 @@ body {
 
 #splashTitle {
     color: white;
-    font-size: 42px;
+    font-size: 72px;
+    font-family: "Palatino", "Georgia";
 }
 
 #hero-wrapper {
@@ -127,4 +128,10 @@ body {
 
 .collegeName {
     margin-bottom: 10px;
+}
+
+.progress {
+  background-color: #aaa;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

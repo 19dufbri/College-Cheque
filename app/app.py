@@ -4,7 +4,7 @@ import json
 from flask import Flask, render_template, url_for, request, jsonify
 import matplotlib.pyplot as plt
 from io import BytesIO
-
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -24,6 +24,13 @@ def results():
         if college["INSTNM"] in jsondata["collegeNames"]:
             results.append(getPersonalData(jsondata, college))
     return render_template("results.html", numres=len(results), results=results)
+
+@app.route('/autocomplete',methods=['GET'])
+def autocomplete():
+    search = request.args.get('term')
+    app.logger.debug(search)
+    return jsonify(json_list=names)
+
 
 def getPersonalData(json, college):
     college["picture"] = makePie(college["racepercent"])
@@ -357,8 +364,15 @@ def makePie(dict):
     for k, v in dict.items():
         labels.append(k)
         percents.append(v)
-
-    plt.pie(percents, labels=labels, colors=colors, startangle=90,frame=True)
+    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
+    # draw circle
+    centre_circle = plt.Circle((0, 0), 0.70, fc='white')
+    fig = plt.gcf()
+    fig.gca().add_artist(centre_circle)
+    # Equal aspect ratio ensures that pie is drawn as a circle
+    plt.axis('equal')
+    plt.tight_layout()
+    plt.show()
     buf = BytesIO();
     plt.savefig(buf)
     buf.seek(0)
@@ -368,6 +382,20 @@ def getFloat(college, field):
     if college[field] == "NULL" or college[field] == "PrivacySuppressed":
         return 0.0
     return float(college[field])
+
+def makeScatter():
+    labels = []
+    percents = []
+    colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
+    for k, v in dict.items():
+        labels.append(k)
+        percents.append(v)
+
+    plt.pie(percents, labels=labels, colors=colors, startangle=90,frame=false)
+    buffer = StringIO();
+    plt.savefig(buffer, format="jpg")
+    buffer.seek(0)
+    return base64.b64encode(buffer.read())
 
 initalize()
 
