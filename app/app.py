@@ -363,7 +363,30 @@ def makePie(dict):
         labels.append(k)
         percents.append(v)
 
-    plt.pie(percents, labels=labels, colors=colors, startangle=90,frame=True)
+
+    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
+    # draw circle
+    centre_circle = plt.Circle((0, 0), 0.70, fc='white')
+    fig = plt.gcf()
+    fig.gca().add_artist(centre_circle)
+    # Equal aspect ratio ensures that pie is drawn as a circle
+    plt.axis('equal')
+    plt.tight_layout()
+    plt.show()
+    buffer = StringIO();
+    plt.savefig(buffer, format="jpg")
+    buffer.seek(0)
+    return base64.b64encode(buffer.read())
+
+def makeScatter():
+    labels = []
+    percents = []
+    colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
+    for k, v in dict.items():
+        labels.append(k)
+        percents.append(v)
+
+    plt.pie(percents, labels=labels, colors=colors, startangle=90,frame=false)
     buffer = StringIO();
     plt.savefig(buffer, format="jpg")
     buffer.seek(0)
