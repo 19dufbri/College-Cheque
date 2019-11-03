@@ -4,7 +4,7 @@ import json
 from flask import Flask, render_template, url_for, request, jsonify
 import matplotlib.pyplot as plt
 from io import StringIO
-
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -24,6 +24,13 @@ def results():
         if college["INSTNM"] in jsondata["collegeNames"]:
             results.append(getPersonalData(jsondata, college))
     return render_template("results.html", numres=len(results), results=results)
+
+@app.route('/autocomplete',methods=['GET'])
+def autocomplete():
+    search = request.args.get('term')
+    app.logger.debug(search)
+    return jsonify(json_list=names)
+
 
 def getPersonalData(json, college):
     college["picture"] = makePie(college["racepercent"]).decode('utf-8')

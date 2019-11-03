@@ -128,3 +128,9 @@ body {
 .collegeName {
     margin-bottom: 10px;
 }
+
+.progress {
+  background-color: #aaa;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

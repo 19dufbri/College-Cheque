@@ -242,4 +242,16 @@
     This site uses cookies to store previous input data.
     </footer>
     <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script>
+$(function() {
+    $.ajax({
+        url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName1').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+</script>
 {% endblock %}
