@@ -28,8 +28,8 @@
 						<div class="col-sm-6">
 							<p>Net Price: <i>${{ college["net"] | e }}</i></p>
 							<p class="sub">Tuition: <i>${{ college["tuition"] | e }}</i></p>
-							<p class="sub">Pell Grant: <i>{{ college["PCTPELL"]| e }}</i>%</p>
-							<p class="sub">Federal Loan: <i>{{ college["PCTFLOAN"]| e }}</i>%</p>
+							<p class="sub">Pell Grant: <i>{{ 100*(college["PCTPELL"]|float)| e }}</i>%</p>
+							<p class="sub">Federal Loan: <i>{{ 100*(college["PCTFLOAN"]|float)| e }}</i>%</p>
 
 							<br/>
 

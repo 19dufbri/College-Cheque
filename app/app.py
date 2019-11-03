@@ -3,7 +3,7 @@ import csv
 import json
 from flask import Flask, render_template, url_for, request, jsonify
 import matplotlib.pyplot as plt
-from io import StringIO
+from io import BytesIO
 from flask import jsonify
 import numpy as np
 
@@ -36,283 +36,288 @@ def autocomplete():
 def getPersonalData(json, college):
     college["picture"] = makePie(college["racepercent"]).decode('utf-8')
     
-    if json["degree"] == 1 or json["degree"] == 2:
-        college["comp"] = college["C150_L4"]
-        college["reten"] = college["RET_FTL4"]
+    if json["degree"] == "1" or json["degree"] == "2":
+        college["comp"] = getString(college, "C150_L4")
+        college["reten"] = getString(college, "RET_FTL4")
     else:
-        college["comp"] = college["C150_4"]
-        college["reten"] = college["RET_FT4"]
+        college["comp"] = getString(college, "C150_4")
+        college["reten"] = getString(college, "RET_FT4")
 
-    college["net"] = college["tuition"][json["income"]]
+    incomeNum = json["income"]
+    tuition = college["price"]
+    college["net"] = tuition[incomeNum]
+
+    college["PCTPELL"] = 100 * getFloat(college, "PCTPELL")
+    college["PCTFLOAN"] = 100 * getFloat(college, "PCTFLOAN")
 
     if college["TUITIONFEE_PROG"] == "NULL":
         if college["STABBR"] == json["state"]:
-            college["tuition"] = college["TUITIONFEE_IN"]
+            college["tuition"] = getString(college, "TUITIONFEE_IN")
         else:
-            college["tuition"] = college["TUITIONFEE_OUT"]
+            college["tuition"] = getString(college, "TUITIONFEE_OUT")
     else:
-        college["tuition"] = college["TUITIONFEE_PROG"];
+        college["tuition"] = getString(college, "TUITIONFEE_PROG")
 
     sumelems = 0
     numelems = 0
     if json["income"] == 1:
         numelems += 1
-        sumelems += float(college["LO_INC_DEBT_MDN"])
+        sumelems += getFloat(college, "LO_INC_DEBT_MDN")
     elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
-        sumelems += float(college["MD_INC_DEBT_MDN"])
+        sumelems += getFloat(college, "MD_INC_DEBT_MDN")
     elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
-        sumelems += float(college["HI_INC_DEBT_MDN"])
+        sumelems += getFloat(college, "HI_INC_DEBT_MDN")
     if json["dependent"] == "yes":
         numelems += 1
-        sumelems += float(college["DEP_DEBT_MDN"])
+        sumelems += getFloat(college, "DEP_DEBT_MDN")
     elif json["dependent"] == "no":
         numelems += 1
-        sumelems += float(college["IND_DEBT_MDN"])
+        sumelems += getFloat(college, "IND_DEBT_MDN")
     if json["pell"] == "yes":
         numelems += 1
-        sumelems += float(college["PELL_DEBT_MDN"])
+        sumelems += getFloat(college, "PELL_DEBT_MDN")
     elif json["pell"] == "no":
         numelems += 1
-        sumelems += float(college["NOPELL_DEBT_MDN"])
+        sumelems += getFloat(college, "NOPELL_DEBT_MDN")
     if json["sex"] == "male":
         numelems += 1
-        sumelems += float(college["MALE_DEBT_MDN"])
+        sumelems += getFloat(college, "MALE_DEBT_MDN")
     elif json["sex"] == "female":
         numelems += 1
-        sumelems += float(college["FEMALE_DEBT_MDN"])
+        sumelems += getFloat(college, "FEMALE_DEBT_MDN")
     if json["firstGen"] == "yes":
         numelems += 1
-        sumelems += float(college["FIRSTGEN_DEBT_MDN"])
+        sumelems += getFloat(college, "FIRSTGEN_DEBT_MDN")
     elif json["firstGen"] == "no":
         numelems += 1
-        sumelems += float(college["NOFIRSTGEN_DEBT_MDN"])
+        sumelems += getFloat(college, "NOTFIRSTGEN_DEBT_MDN")
     if numelems == 0:
         numelems = 1
-        sumelems = float(college["GRAD_DEBT_MDN"])
+        sumelems = getFloat(college, "GRAD_DEBT_MDN")
     college["debt"] = sumelems / numelems
     
     sumelems = 0
     numelems = 0
     if json["income"] == 1:
         numelems += 1
-        sumelems += float(college["LO_INC_RPY_1YR_RT"])
+        sumelems += getFloat(college, "LO_INC_RPY_1YR_RT")
     elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
-        sumelems += float(college["MD_INC_RPY_1YR_RT"])
+        sumelems += getFloat(college, "MD_INC_RPY_1YR_RT")
     elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
-        sumelems += float(college["HI_INC_RPY_1YR_RT"])
+        sumelems += getFloat(college, "HI_INC_RPY_1YR_RT")
     if json["dependent"] == "yes":
         numelems += 1
-        sumelems += float(college["DEP_RPY_1YR_RT"])
+        sumelems += getFloat(college, "DEP_RPY_1YR_RT")
     elif json["dependent"] == "no":
         numelems += 1
-        sumelems += float(college["IND_RPY_1YR_RT"])
+        sumelems += getFloat(college, "IND_RPY_1YR_RT")
     if json["pell"] == "yes":
         numelems += 1
-        sumelems += float(college["PELL_RPY_1YR_RT"])
+        sumelems += getFloat(college, "PELL_RPY_1YR_RT")
     elif json["pell"] == "no":
         numelems += 1
-        sumelems += float(college["NOPELL_RPY_1YR_RT"])
+        sumelems += getFloat(college, "NOPELL_RPY_1YR_RT")
     if json["sex"] == "male":
         numelems += 1
-        sumelems += float(college["MALE_RPY_1YR_RT"])
+        sumelems += getFloat(college, "MALE_RPY_1YR_RT")
     elif json["sex"] == "female":
         numelems += 1
-        sumelems += float(college["FEMALE_RPY_1YR_RT"])
+        sumelems += getFloat(college, "FEMALE_RPY_1YR_RT")
     if json["firstGen"] == "yes":
         numelems += 1
-        sumelems += float(college["FIRSTGEN_RPY_1YR_RT"])
+        sumelems += getFloat(college, "FIRSTGEN_RPY_1YR_RT")
     elif json["firstGen"] == "no":
         numelems += 1
-        sumelems += float(college["NOFIRSTGEN_RPY_1YR_RT"])
+        sumelems += getFloat(college, "NOTFIRSTGEN_RPY_1YR_RT")
     if numelems == 0:
         numelems = 1
-        sumelems = float(college["COMPL_RPY_1YR_RT"])
+        sumelems = getFloat(college, "COMPL_RPY_1YR_RT")
     college["one"] = sumelems / numelems
 
     sumelems = 0
     numelems = 0
     if json["income"] == 1:
         numelems += 1
-        sumelems += float(college["LO_INC_RPY_3YR_RT"])
+        sumelems += getFloat(college, "LO_INC_RPY_3YR_RT")
     elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
-        sumelems += float(college["MD_INC_RPY_3YR_RT"])
+        sumelems += getFloat(college, "MD_INC_RPY_3YR_RT")
     elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
-        sumelems += float(college["HI_INC_RPY_3YR_RT"])
+        sumelems += getFloat(college, "HI_INC_RPY_3YR_RT")
     if json["dependent"] == "yes":
         numelems += 1
-        sumelems += float(college["DEP_RPY_3YR_RT"])
+        sumelems += getFloat(college, "DEP_RPY_3YR_RT")
     elif json["dependent"] == "no":
         numelems += 1
-        sumelems += float(college["IND_RPY_3YR_RT"])
+        sumelems += getFloat(college, "IND_RPY_3YR_RT")
     if json["pell"] == "yes":
         numelems += 1
-        sumelems += float(college["PELL_RPY_3YR_RT"])
+        sumelems += getFloat(college, "PELL_RPY_3YR_RT")
     elif json["pell"] == "no":
         numelems += 1
-        sumelems += float(college["NOPELL_RPY_3YR_RT"])
+        sumelems += getFloat(college, "NOPELL_RPY_3YR_RT")
     if json["sex"] == "male":
         numelems += 1
-        sumelems += float(college["MALE_RPY_3YR_RT"])
+        sumelems += getFloat(college, "MALE_RPY_3YR_RT")
     elif json["sex"] == "female":
         numelems += 1
-        sumelems += float(college["FEMALE_RPY_3YR_RT"])
+        sumelems += getFloat(college, "FEMALE_RPY_3YR_RT")
     if json["firstGen"] == "yes":
         numelems += 1
-        sumelems += float(college["FIRSTGEN_RPY_3YR_RT"])
+        sumelems += getFloat(college, "FIRSTGEN_RPY_3YR_RT")
     elif json["firstGen"] == "no":
         numelems += 1
-        sumelems += float(college["NOFIRSTGEN_RPY_3YR_RT"])
+        sumelems += getFloat(college, "NOTFIRSTGEN_RPY_3YR_RT")
     if numelems == 0:
         numelems = 1
-        sumelems = float(college["GRAD_RPY_3YR_RT"])
+        sumelems = getFloat(college, "GRAD_RPY_3YR_RT")
     college["three"] = sumelems / numelems
 
     sumelems = 0
     numelems = 0
     if json["income"] == 1:
         numelems += 1
-        sumelems += float(college["LO_INC_RPY_5YR_RT"])
+        sumelems += getFloat(college, "LO_INC_RPY_5YR_RT")
     elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
-        sumelems += float(college["MD_INC_RPY_5YR_RT"])
+        sumelems += getFloat(college, "MD_INC_RPY_5YR_RT")
     elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
-        sumelems += float(college["HI_INC_RPY_5YR_RT"])
+        sumelems += getFloat(college, "HI_INC_RPY_5YR_RT")
     if json["dependent"] == "yes":
         numelems += 1
-        sumelems += float(college["DEP_RPY_5YR_RT"])
+        sumelems += getFloat(college, "DEP_RPY_5YR_RT")
     elif json["dependent"] == "no":
         numelems += 1
-        sumelems += float(college["IND_RPY_5YR_RT"])
+        sumelems += getFloat(college, "IND_RPY_5YR_RT")
     if json["pell"] == "yes":
         numelems += 1
-        sumelems += float(college["PELL_RPY_5YR_RT"])
+        sumelems += getFloat(college, "PELL_RPY_5YR_RT")
     elif json["pell"] == "no":
         numelems += 1
-        sumelems += float(college["NOPELL_RPY_5YR_RT"])
+        sumelems += getFloat(college, "NOPELL_RPY_5YR_RT")
     if json["sex"] == "male":
         numelems += 1
-        sumelems += float(college["MALE_RPY_5YR_RT"])
+        sumelems += getFloat(college, "MALE_RPY_5YR_RT")
     elif json["sex"] == "female":
         numelems += 1
-        sumelems += float(college["FEMALE_RPY_5YR_RT"])
+        sumelems += getFloat(college, "FEMALE_RPY_5YR_RT")
     if json["firstGen"] == "yes":
         numelems += 1
-        sumelems += float(college["FIRSTGEN_RPY_5YR_RT"])
+        sumelems += getFloat(college, "FIRSTGEN_RPY_5YR_RT")
     elif json["firstGen"] == "no":
         numelems += 1
-        sumelems += float(college["NOFIRSTGEN_RPY_5YR_RT"])
+        sumelems += getFloat(college, "NOTFIRSTGEN_RPY_5YR_RT")
     if numelems == 0:
         numelems = 1
-        sumelems = float(college["COMPL_RPY_5YR_RT"])
+        sumelems = getFloat(college, "COMPL_RPY_5YR_RT")
     college["five"] = sumelems / numelems
 
     sumelems = 0
     numelems = 0
     if json["income"] == 1:
         numelems += 1
-        sumelems += float(college["LO_INC_RPY_7YR_RT"])
+        sumelems += getFloat(college, "LO_INC_RPY_7YR_RT")
     elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
-        sumelems += float(college["MD_INC_RPY_7YR_RT"])
+        sumelems += getFloat(college, "MD_INC_RPY_7YR_RT")
     elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
-        sumelems += float(college["HI_INC_RPY_7YR_RT"])
+        sumelems += getFloat(college, "HI_INC_RPY_7YR_RT")
     if json["dependent"] == "yes":
         numelems += 1
-        sumelems += float(college["DEP_RPY_7YR_RT"])
+        sumelems += getFloat(college, "DEP_RPY_7YR_RT")
     elif json["dependent"] == "no":
         numelems += 1
-        sumelems += float(college["IND_RPY_7YR_RT"])
+        sumelems += getFloat(college, "IND_RPY_7YR_RT")
     if json["pell"] == "yes":
         numelems += 1
-        sumelems += float(college["PELL_RPY_7YR_RT"])
+        sumelems += getFloat(college, "PELL_RPY_7YR_RT")
     elif json["pell"] == "no":
         numelems += 1
-        sumelems += float(college["NOPELL_RPY_7YR_RT"])
+        sumelems += getFloat(college, "NOPELL_RPY_7YR_RT")
     if json["sex"] == "male":
         numelems += 1
-        sumelems += float(college["MALE_RPY_7YR_RT"])
+        sumelems += getFloat(college, "MALE_RPY_7YR_RT")
     elif json["sex"] == "female":
         numelems += 1
-        sumelems += float(college["FEMALE_RPY_7YR_RT"])
+        sumelems += getFloat(college, "FEMALE_RPY_7YR_RT")
     if json["firstGen"] == "yes":
         numelems += 1
-        sumelems += float(college["FIRSTGEN_RPY_7YR_RT"])
+        sumelems += getFloat(college, "FIRSTGEN_RPY_7YR_RT")
     elif json["firstGen"] == "no":
         numelems += 1
-        sumelems += float(college["NOFIRSTGEN_RPY_7YR_RT"])
+        sumelems += getFloat(college, "NOTFIRSTGEN_RPY_7YR_RT")
     if numelems == 0:
         numelems = 1
-        sumelems = float(college["COMPL_RPY_7YR_RT"])
+        sumelems = getFloat(college, "COMPL_RPY_7YR_RT")
     college["seven"] = sumelems / numelems
 
     if json["degree"] == 1 or json["degree"] == 2:
         if json["race"] == "white":
-            college["estim"] = college["C150_L4_WHITE"]
+            college["estim"] = getString(college, "C150_L4_WHITE")
         elif json["race"] == "black":
-            college["estim"] = college["C150_L4_BLACK"]
+            college["estim"] = getString(college, "C150_L4_BLACK")
         elif json["race"] == "hispanic":
-            college["estim"] = college["C150_L4_HISP"]
+            college["estim"] = getString(college, "C150_L4_HISP")
         elif json["race"] == "asian":
-            college["estim"] = college["C150_L4_ASIAN"]
+            college["estim"] = getString(college, "C150_L4_ASIAN")
         elif json["race"] == "northNative":
-            college["estim"] = college["C150_L4_AIAN"]
+            college["estim"] = getString(college, "C150_L4_AIAN")
         elif json["race"] == "southNative":
-            college["estim"] = college["C150_L4_NHPI"]
-        elif jsom["race"] == "twoOrMore":
-            college["estim"] = college["C150_L4_2MOR"]
+            college["estim"] = getString(college, "C150_L4_NHPI")
+        elif json["race"] == "twoOrMore":
+            college["estim"] = getString(college, "C150_L4_2MOR")
         elif json["race"] == "nonResAlien":
-            college["estim"] = college["C150_L4_NRA"]
+            college["estim"] = getString(college, "C150_L4_NRA")
         elif json["race"] == "unknown":
-            college["estim"] = college["C150_L4_UNKN"]
+            college["estim"] = getString(college, "C150_L4_UNKN")
         else:
-            college["estim"] = college["C150_L4"]
+            college["estim"] = getString(college, "C150_L4")
     else:
         if json["race"] == "white":
-            college["estim"] = college["C150_4_WHITE"]
+            college["estim"] = getString(college, "C150_4_WHITE")
         elif json["race"] == "black":
-            college["estim"] = college["C150_4_BLACK"]
+            college["estim"] = getString(college, "C150_4_BLACK")
         elif json["race"] == "hispanic":
-            college["estim"] = college["C150_4_HISP"]
+            college["estim"] = getString(college, "C150_4_HISP")
         elif json["race"] == "asian":
-            college["estim"] = college["C150_4_ASIAN"]
+            college["estim"] = getString(college, "C150_4_ASIAN")
         elif json["race"] == "northNative":
-            college["estim"] = college["C150_4_AIAN"]
+            college["estim"] = getString(college, "C150_4_AIAN")
         elif json["race"] == "southNative":
-            college["estim"] = college["C150_4_NHPI"]
-        elif jsom["race"] == "twoOrMore":
-            college["estim"] = college["C150_4_2MOR"]
+            college["estim"] = getString(college, "C150_4_NHPI")
+        elif json["race"] == "twoOrMore":
+            college["estim"] = getString(college, "C150_4_2MOR")
         elif json["race"] == "nonResAlien":
-            college["estim"] = college["C150_4_NRA"]
+            college["estim"] = getString(college, "C150_4_NRA")
         elif json["race"] == "unknown":
-            college["estim"] = college["C150_4_UNKN"]
+            college["estim"] = getString(college, "C150_4_UNKN")
         else:
-            college["estim"] = college["C150_4"]
+            college["estim"] = getString(college, "C150_4")
     
     sumelems = 0
     numelems = 0
     if json["dependent"] == "yes":
         numelems += 1
-        sumelems += float(college["MN_EARN_WNE_INDEP0_P10"])
+        sumelems += getFloat(college, "MN_EARN_WNE_INDEP0_P10")
     elif json["dependent"] == "no":
         numelems += 1
-        sumelems += float(college["MN_EARN_WNE_INDEP1_P10"])
+        sumelems += getFloat(college, "MN_EARN_WNE_INDEP1_P10")
     if json["sex"] == "male":
         numelems += 1
-        sumelems += float(college["MN_EARN_WNE_MALE1_P10"])
+        sumelems += getFloat(college, "MN_EARN_WNE_MALE1_P10")
     elif json["sex"] == "female":
         numelems += 1
-        sumelems += float(college["MN_EARN_WNE_MALE0_P10"])
+        sumelems += getFloat(college, "MN_EARN_WNE_MALE0_P10")
     if numelems == 0:
         numelems = 1
-        sumelems = float(college["MN_EARN_WNE_P10"])
+        sumelems = getFloat(college, "MN_EARN_WNE_P10")
     college["ten"] = sumelems / numelems;
 
 
@@ -353,7 +358,7 @@ def processRow(row):
         tuition["3"] = row["NPT43_PRIV"]
         tuition["4"] = row["NPT44_PRIV"]
         tuition["5"] = row["NPT45_PRIV"]
-    row["tuition"] = tuition
+    row["price"] = tuition
     return row
 
 def makePie(dict):
@@ -374,12 +379,23 @@ def makePie(dict):
     plt.axis('equal')
     plt.tight_layout()
     plt.show()
-    buffer = StringIO();
-    plt.savefig(buffer, format="jpg")
-    buffer.seek(0)
-    return base64.b64encode(buffer.read())
+    buf = BytesIO();
+    plt.savefig(buf)
+    buf.seek(0)
+    return base64.b64encode(buf.getvalue()).decode('utf-8')
+
+def getFloat(college, field):
+    if college[field] == "NULL" or college[field] == "PrivacySuppressed":
+        return 0.0
+    return float(college[field])
+
+def getString(college, field):
+    if college[field] == "NULL" or college[field] == "PrivacySuppressed":
+        return "N/A"
+    return college[field]
 
 def makeScatter(dict1, dict2):
+    labels = []
     avgCost = []
     percents = []
     colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
