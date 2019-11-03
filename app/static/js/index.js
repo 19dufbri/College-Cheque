@@ -225,5 +225,6 @@ $(function(ready) {
     if (getCookie("college-input-data") != "") {
         $(".progress-bar").css('width', '0%');
     }
+
 });
 
