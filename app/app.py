@@ -370,7 +370,7 @@ def makePie(dict):
         percents.append(v)
 
 
-    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=1.35)
+    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=1.4)
     # draw circle
     centre_circle = plt.Circle((0, 0), 0.70, fc='white')
     fig = plt.gcf()
@@ -382,6 +382,8 @@ def makePie(dict):
     buf = BytesIO();
     plt.savefig(buf)
     buf.seek(0)
+    labels = []
+    percents = []
     return base64.b64encode(buf.getvalue()).decode('utf-8')
 
 def getFloat(college, field):
