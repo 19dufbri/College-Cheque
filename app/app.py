@@ -36,18 +36,18 @@ def getPersonalData(json, college):
     college["picture"] = makePie(college["racepercent"])
     
     if json["degree"] == "1" or json["degree"] == "2":
-        college["comp"] = getString(college, "C150_L4")
-        college["reten"] = getString(college, "RET_FTL4")
+        college["comp"] = int(100 * getFloat(college, "C150_L4"))
+        college["reten"] = int(100 * getFloat(college, "RET_FTL4"))
     else:
-        college["comp"] = getString(college, "C150_4")
-        college["reten"] = getString(college, "RET_FT4")
+        college["comp"] = int(100 * getFloat(college, "C150_4"))
+        college["reten"] = int(100 * getFloat(college, "RET_FT4"))
 
     incomeNum = json["income"]
     tuition = college["price"]
     college["net"] = tuition[incomeNum]
 
-    college["PCTPELL"] = 100 * getFloat(college, "PCTPELL")
-    college["PCTFLOAN"] = 100 * getFloat(college, "PCTFLOAN")
+    college["pell"] = int(100 * getFloat(college, "PCTPELL"))
+    college["loan"] = int(100 * getFloat(college, "PCTFLOAN"))
 
     if college["TUITIONFEE_PROG"] == "NULL":
         if college["STABBR"] == json["state"]:
@@ -95,7 +95,7 @@ def getPersonalData(json, college):
     if numelems == 0:
         numelems = 1
         sumelems = getFloat(college, "GRAD_DEBT_MDN")
-    college["debt"] = sumelems / numelems
+    college["debt"] = int(sumelems / numelems)
     
     sumelems = 0
     numelems = 0
@@ -135,7 +135,7 @@ def getPersonalData(json, college):
     if numelems == 0:
         numelems = 1
         sumelems = getFloat(college, "COMPL_RPY_1YR_RT")
-    college["one"] = sumelems / numelems
+    college["one"] = int(100 * sumelems / numelems)
 
     sumelems = 0
     numelems = 0
@@ -175,7 +175,7 @@ def getPersonalData(json, college):
     if numelems == 0:
         numelems = 1
         sumelems = getFloat(college, "GRAD_RPY_3YR_RT")
-    college["three"] = sumelems / numelems
+    college["three"] = int(100 * sumelems / numelems)
 
     sumelems = 0
     numelems = 0
@@ -215,7 +215,7 @@ def getPersonalData(json, college):
     if numelems == 0:
         numelems = 1
         sumelems = getFloat(college, "COMPL_RPY_5YR_RT")
-    college["five"] = sumelems / numelems
+    college["five"] = int(100 * sumelems / numelems)
 
     sumelems = 0
     numelems = 0
@@ -255,50 +255,51 @@ def getPersonalData(json, college):
     if numelems == 0:
         numelems = 1
         sumelems = getFloat(college, "COMPL_RPY_7YR_RT")
-    college["seven"] = sumelems / numelems
+    college["seven"] = int(100 * sumelems / numelems)
 
     if json["degree"] == 1 or json["degree"] == 2:
         if json["race"] == "white":
-            college["estim"] = getString(college, "C150_L4_WHITE")
+            college["estim"] = getFloat(college, "C150_L4_WHITE")
         elif json["race"] == "black":
-            college["estim"] = getString(college, "C150_L4_BLACK")
+            college["estim"] = getFloat(college, "C150_L4_BLACK")
         elif json["race"] == "hispanic":
-            college["estim"] = getString(college, "C150_L4_HISP")
+            college["estim"] = getFloat(college, "C150_L4_HISP")
         elif json["race"] == "asian":
-            college["estim"] = getString(college, "C150_L4_ASIAN")
+            college["estim"] = getFloat(college, "C150_L4_ASIAN")
         elif json["race"] == "northNative":
-            college["estim"] = getString(college, "C150_L4_AIAN")
+            college["estim"] = getFloat(college, "C150_L4_AIAN")
         elif json["race"] == "southNative":
-            college["estim"] = getString(college, "C150_L4_NHPI")
+            college["estim"] = getFloat(college, "C150_L4_NHPI")
         elif json["race"] == "twoOrMore":
-            college["estim"] = getString(college, "C150_L4_2MOR")
+            college["estim"] = getFloat(college, "C150_L4_2MOR")
         elif json["race"] == "nonResAlien":
-            college["estim"] = getString(college, "C150_L4_NRA")
+            college["estim"] = getFloat(college, "C150_L4_NRA")
         elif json["race"] == "unknown":
-            college["estim"] = getString(college, "C150_L4_UNKN")
+            college["estim"] = getFloat(college, "C150_L4_UNKN")
         else:
-            college["estim"] = getString(college, "C150_L4")
+            college["estim"] = getFloat(college, "C150_L4")
     else:
         if json["race"] == "white":
-            college["estim"] = getString(college, "C150_4_WHITE")
+            college["estim"] = getFloat(college, "C150_4_WHITE")
         elif json["race"] == "black":
-            college["estim"] = getString(college, "C150_4_BLACK")
+            college["estim"] = getFloat(college, "C150_4_BLACK")
         elif json["race"] == "hispanic":
-            college["estim"] = getString(college, "C150_4_HISP")
+            college["estim"] = getFloat(college, "C150_4_HISP")
         elif json["race"] == "asian":
-            college["estim"] = getString(college, "C150_4_ASIAN")
+            college["estim"] = getFloat(college, "C150_4_ASIAN")
         elif json["race"] == "northNative":
-            college["estim"] = getString(college, "C150_4_AIAN")
+            college["estim"] = getFloat(college, "C150_4_AIAN")
         elif json["race"] == "southNative":
-            college["estim"] = getString(college, "C150_4_NHPI")
+            college["estim"] = getFloat(college, "C150_4_NHPI")
         elif json["race"] == "twoOrMore":
-            college["estim"] = getString(college, "C150_4_2MOR")
+            college["estim"] = getFloat(college, "C150_4_2MOR")
         elif json["race"] == "nonResAlien":
-            college["estim"] = getString(college, "C150_4_NRA")
+            college["estim"] = getFloat(college, "C150_4_NRA")
         elif json["race"] == "unknown":
-            college["estim"] = getString(college, "C150_4_UNKN")
+            college["estim"] = getFloat(college, "C150_4_UNKN")
         else:
-            college["estim"] = getString(college, "C150_4")
+            college["estim"] = getFloat(college, "C150_4")
+    college["estim"] = int(college["estim"] * 100)
     
     sumelems = 0
     numelems = 0
@@ -317,8 +318,7 @@ def getPersonalData(json, college):
     if numelems == 0:
         numelems = 1
         sumelems = getFloat(college, "MN_EARN_WNE_P10")
-    college["ten"] = sumelems / numelems;
-
+    college["ten"] = int(sumelems / numelems);
 
     return college
 
