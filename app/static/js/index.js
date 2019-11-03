@@ -84,6 +84,7 @@ $(function(ready) {
             $('#addBtn').css('display', 'none');
         }
         updateBtnSubmit();
+        $("#progBar").addClass("progress-bar-animated").delay(600).removeClass("progress-bar-animated");
     })
 
     $('#remBtn').on('click', function (e) {

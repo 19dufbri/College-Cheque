@@ -10,6 +10,14 @@ html {
 	scrollbar-width: thin;
 }
 
+.title {
+    font-family: "Palatino", "Georgia";
+}
+
+.smallText::after {
+	font-family: "Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+
 #site {
 	display: flex;
 	flex-direction: column;
