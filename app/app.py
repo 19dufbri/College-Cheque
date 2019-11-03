@@ -86,10 +86,10 @@ def getPersonalData(json, college):
     if json["income"] == 1:
         numelems += 1
         sumelems += float(college["LO_INC_RPY_1YR_RT"])
-    elif json["income"] == 2 || json["income"] == 3:
+    elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
         sumelems += float(college["MD_INC_RPY_1YR_RT"])
-    elif json["income"] == 4 || json["income"] == 5:
+    elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
         sumelems += float(college["HI_INC_RPY_1YR_RT"])
     if json["dependent"] == "yes":
@@ -126,10 +126,10 @@ def getPersonalData(json, college):
     if json["income"] == 1:
         numelems += 1
         sumelems += float(college["LO_INC_RPY_3YR_RT"])
-    elif json["income"] == 2 || json["income"] == 3:
+    elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
         sumelems += float(college["MD_INC_RPY_3YR_RT"])
-    elif json["income"] == 4 || json["income"] == 5:
+    elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
         sumelems += float(college["HI_INC_RPY_3YR_RT"])
     if json["dependent"] == "yes":
@@ -166,10 +166,10 @@ def getPersonalData(json, college):
     if json["income"] == 1:
         numelems += 1
         sumelems += float(college["LO_INC_RPY_5YR_RT"])
-    elif json["income"] == 2 || json["income"] == 3:
+    elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
         sumelems += float(college["MD_INC_RPY_5YR_RT"])
-    elif json["income"] == 4 || json["income"] == 5:
+    elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
         sumelems += float(college["HI_INC_RPY_5YR_RT"])
     if json["dependent"] == "yes":
@@ -206,10 +206,10 @@ def getPersonalData(json, college):
     if json["income"] == 1:
         numelems += 1
         sumelems += float(college["LO_INC_RPY_7YR_RT"])
-    elif json["income"] == 2 || json["income"] == 3:
+    elif json["income"] == 2 or json["income"] == 3:
         numelems += 1
         sumelems += float(college["MD_INC_RPY_7YR_RT"])
-    elif json["income"] == 4 || json["income"] == 5:
+    elif json["income"] == 4 or json["income"] == 5:
         numelems += 1
         sumelems += float(college["HI_INC_RPY_7YR_RT"])
     if json["dependent"] == "yes":
