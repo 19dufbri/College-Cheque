@@ -15,11 +15,35 @@ def index():
 def results():
     name = ""
     results = []
+    json = json.loads(request.cookies.get("college-input-data", "{}"))
     for college in finalData:
         if college["name"] == name:
-            college["picture"] = makePie(college["racepercent"])
-            results.append(college)
+            results.append(getPersonalData(college))
     return render_template("results.html", results=results)
+
+def getPersonalData(json, college):
+    college["picture"] = makePie(college["racepercent"])
+    
+    if json["degree"] == 1:
+        college["comp"] = college['C150_L4']
+        college["reten"] = college['RET_FTL4']
+    else if json["degree"] == 2:
+        college["comp"] = college['C150_L4']
+        college["reten"] = college['RET_FTL4']
+    else
+        college["comp"] = college['C150_4']
+        college["reten"] = college['RET_FT4']
+
+    if college["TUITIONFEE_PROG"] == "NULL":
+        if college["STABBR"] == json["state"]:
+            college["tuition"] = college["TUITIONFEE_IN"]
+        else:
+            college["tuition"] = college["TUITIONFEE_OUT"]
+    else:
+        college["tuition"] = college["TUITIONFEE_PROG"];
+
+    return college
+
 
 def initalize():
     with open('data.csv') as csvDataFile:

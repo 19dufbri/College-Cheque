@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block head %}
-<title>College Search - {{ numResults|e }} Results</title>
+<title>College Search - {{ len(colleges) | e }} Results</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/results.css') }}">
 <style>
 	.main-site {
@@ -14,10 +14,6 @@
 <section class="main-site">
 	<section class="container">
 		<form class="form-inline">
-			<div>
-				<button class="btn btn-secondary"><i class="fas fa-arrow-left"></i></button>
-				<button class="btn btn-secondary"><i class="fas fa-arrow-right"></i></button>
-			</div>
 			<div class="ml-auto">
 				<input class="form-control" placeholder="College Name" name="search" />
 				<input class="btn btn-primary" type="submit" value="Search" />
@@ -27,12 +23,35 @@
 			{% for college in colleges %}
 			<balh class="balh">
 				<section>
+					<h3>{{ college["INSTNM"] | e }}<small>{{ college["STABBR"] | e }}</small></h3>
 					<div class="d-flex">
-						<span class="h3">{{ college["INSTNM"] | e }}<small>{{ college["STABBR"] | e }}</small></span>
-						<span class="h5 ml-auto">{{ college["tuition"]["0"] | e }}</span>
-					</div>
-					<div class="d-flex">
+						<div class="col-sm-8">
+							<p>Net Price: <i>${{ college["net"] | e }}</i></p>
+							<p class="sub">Tuition: <i>${{ college["tuition"] | e }}</i></p>
+							<p class="sub">Pell Grant: <i>{{ college["pell"]| e }}</i>%</p>
+							<p class="sub">Federal Load: <i>{{ college["fed"]| e }}</i>%</p>
+
+							<br/>
+
+							<p>Median Debt: <i>${{ college["debt"] | e }}</i></p>
+							<p class="sub">1st Year Employment: <i>{{ college["one"] | e }}</i>%</p>
+							<p class="sub">3rd Year Employment: <i>{{ college["three"] | e }}</i>%</p>
+							<p class="sub">5th Year Employment: <i>{{ college["five"] | e }}</i>%</p>
+							<p class="sub">7th Year Employment: <i>{{ college["seven"] | e }}</i>%</p>
+
+							<br/>
+
+							<h5>10 Year Outlook: <i>${{ college["ten"] | e }}</i></h5>
+						</div>
 						<div class="col-sm-4">
+							<h4>Demographics:</h4>
+							<img src="data:image/png;base64,{{ college['picture'] }}"/>
+							
+							<br/>
+
+							<p>Overall Percent Completion: <i>{{ college["comp"] | e }}</i>%</p>
+							<p><b>Esitmated Completion Rate: <i>{{ college["estim"] | e }}</i>%</b></p>
+							<p>Retention Rate: <i>{{ college["reten"] | e }}</i>%</p>
 						</div>
 					</div>
 				</section>
