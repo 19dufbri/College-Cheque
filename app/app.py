@@ -36,23 +36,26 @@ def getPersonalData(json, college):
     college["picture"] = makePie(college["racepercent"])
     
     if json["degree"] == "1" or json["degree"] == "2":
-        college["comp"] = college["C150_L4"]
-        college["reten"] = college["RET_FTL4"]
+        college["comp"] = getString(college, "C150_L4")
+        college["reten"] = getString(college, "RET_FTL4")
     else:
-        college["comp"] = college["C150_4"]
-        college["reten"] = college["RET_FT4"]
+        college["comp"] = getString(college, "C150_4")
+        college["reten"] = getString(college, "RET_FT4")
 
     incomeNum = json["income"]
-    tuition = college["tuition"]
+    tuition = college["price"]
     college["net"] = tuition[incomeNum]
+
+    college["PCTPELL"] = 100 * getFloat(college, "PCTPELL")
+    college["PCTFLOAN"] = 100 * getFloat(college, "PCTFLOAN")
 
     if college["TUITIONFEE_PROG"] == "NULL":
         if college["STABBR"] == json["state"]:
-            college["tuition"] = college["TUITIONFEE_IN"]
+            college["tuition"] = getString(college, "TUITIONFEE_IN")
         else:
-            college["tuition"] = college["TUITIONFEE_OUT"]
+            college["tuition"] = getString(college, "TUITIONFEE_OUT")
     else:
-        college["tuition"] = college["TUITIONFEE_PROG"]
+        college["tuition"] = getString(college, "TUITIONFEE_PROG")
 
     sumelems = 0
     numelems = 0
@@ -256,46 +259,46 @@ def getPersonalData(json, college):
 
     if json["degree"] == 1 or json["degree"] == 2:
         if json["race"] == "white":
-            college["estim"] = college["C150_L4_WHITE"]
+            college["estim"] = getString(college, "C150_L4_WHITE")
         elif json["race"] == "black":
-            college["estim"] = college["C150_L4_BLACK"]
+            college["estim"] = getString(college, "C150_L4_BLACK")
         elif json["race"] == "hispanic":
-            college["estim"] = college["C150_L4_HISP"]
+            college["estim"] = getString(college, "C150_L4_HISP")
         elif json["race"] == "asian":
-            college["estim"] = college["C150_L4_ASIAN"]
+            college["estim"] = getString(college, "C150_L4_ASIAN")
         elif json["race"] == "northNative":
-            college["estim"] = college["C150_L4_AIAN"]
+            college["estim"] = getString(college, "C150_L4_AIAN")
         elif json["race"] == "southNative":
-            college["estim"] = college["C150_L4_NHPI"]
+            college["estim"] = getString(college, "C150_L4_NHPI")
         elif json["race"] == "twoOrMore":
-            college["estim"] = college["C150_L4_2MOR"]
+            college["estim"] = getString(college, "C150_L4_2MOR")
         elif json["race"] == "nonResAlien":
-            college["estim"] = college["C150_L4_NRA"]
+            college["estim"] = getString(college, "C150_L4_NRA")
         elif json["race"] == "unknown":
-            college["estim"] = college["C150_L4_UNKN"]
+            college["estim"] = getString(college, "C150_L4_UNKN")
         else:
-            college["estim"] = college["C150_L4"]
+            college["estim"] = getString(college, "C150_L4")
     else:
         if json["race"] == "white":
-            college["estim"] = college["C150_4_WHITE"]
+            college["estim"] = getString(college, "C150_4_WHITE")
         elif json["race"] == "black":
-            college["estim"] = college["C150_4_BLACK"]
+            college["estim"] = getString(college, "C150_4_BLACK")
         elif json["race"] == "hispanic":
-            college["estim"] = college["C150_4_HISP"]
+            college["estim"] = getString(college, "C150_4_HISP")
         elif json["race"] == "asian":
-            college["estim"] = college["C150_4_ASIAN"]
+            college["estim"] = getString(college, "C150_4_ASIAN")
         elif json["race"] == "northNative":
-            college["estim"] = college["C150_4_AIAN"]
+            college["estim"] = getString(college, "C150_4_AIAN")
         elif json["race"] == "southNative":
-            college["estim"] = college["C150_4_NHPI"]
+            college["estim"] = getString(college, "C150_4_NHPI")
         elif json["race"] == "twoOrMore":
-            college["estim"] = college["C150_4_2MOR"]
+            college["estim"] = getString(college, "C150_4_2MOR")
         elif json["race"] == "nonResAlien":
-            college["estim"] = college["C150_4_NRA"]
+            college["estim"] = getString(college, "C150_4_NRA")
         elif json["race"] == "unknown":
-            college["estim"] = college["C150_4_UNKN"]
+            college["estim"] = getString(college, "C150_4_UNKN")
         else:
-            college["estim"] = college["C150_4"]
+            college["estim"] = getString(college, "C150_4")
     
     sumelems = 0
     numelems = 0
@@ -354,7 +357,7 @@ def processRow(row):
         tuition["3"] = row["NPT43_PRIV"]
         tuition["4"] = row["NPT44_PRIV"]
         tuition["5"] = row["NPT45_PRIV"]
-    row["tuition"] = tuition
+    row["price"] = tuition
     return row
 
 def makePie(dict):
@@ -382,6 +385,11 @@ def getFloat(college, field):
     if college[field] == "NULL" or college[field] == "PrivacySuppressed":
         return 0.0
     return float(college[field])
+
+def getString(college, field):
+    if college[field] == "NULL" or college[field] == "PrivacySuppressed":
+        return "N/A"
+    return college[field]
 
 def makeScatter():
     labels = []
