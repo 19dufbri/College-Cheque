@@ -1,7 +1,7 @@
 import base64
 import csv
 import json
-from flask import Flask, render_template, url_for, request, jsonify
+from flask import Flask, render_template, url_for, request, jsonify, redirect
 import matplotlib.pyplot as plt
 from io import BytesIO
 from flask import jsonify
@@ -19,7 +19,8 @@ def index():
 @app.route('/results')
 def results():
     results = []
-    print(request.cookies.get("college-input-data"));
+    if (request.cookies.get("college-input-data") is None):
+        return redirect("/", code=302)
     jsondata = json.loads(request.cookies.get("college-input-data"))
     for college in finalData:
         if college["INSTNM"] in jsondata["collegeNames"]:
