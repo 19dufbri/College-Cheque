@@ -222,6 +222,15 @@
                         <div id="collegeInputs" class="form-group">
                             <label for="collegeName">College Name(s)</label>
                             <input type="text" class="form-control collegeName" id="collegeName1" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName2" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName3" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName4" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName5" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName6" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName7" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName8" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName9" aria-describedby="collegeName" placeholder="Enter college name">
+                            <input type="text" class="form-control collegeName" id="collegeName10" aria-describedby="collegeName" placeholder="Enter college name">
                         </div>
                         <a id="addBtn" data-target="#carouselSlides" class="btn btn-secondary">Add college</a>
                         <a id="remBtn" data-target="#carouselSlides" class="btn btn-secondary" style="display: none">Remove college</a>
@@ -243,9 +252,9 @@
     </footer>
     <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
     <script>
-$(function() {
-    $.ajax({
-        url: '{{ url_for("autocomplete") }}'
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
         }).done(function (data) {
             $('#collegeName1').autocomplete({
                 source: data.json_list,
@@ -253,5 +262,96 @@ $(function() {
             });
         });
     });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName2').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName3').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName4').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName5').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName6').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName7').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName8').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName9').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+        }).done(function (data) {
+            $('#collegeName10').autocomplete({
+                source: data.json_list,
+                minLength: 3
+            });
+        });
+    });
+
 </script>
 {% endblock %}
