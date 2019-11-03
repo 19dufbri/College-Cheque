@@ -19,20 +19,17 @@ def initalize():
             finalData.append(processRow(row))
 
 def processRow(row):
-    newRow = {}
-    newRow["name" = row["INSTNM"]
-    newRow["state"] = row["STABBR"]
     races = {}
-    races["white"] = row["UGDS_WHITE"] / row["UGDS"]
-    races["black"] = row["UGDS_BLACK"] / row["UGDS"]
-    races["hispanic"] = row["UGDS_HISP"] / row["UGDS"]
-    races["asian"] = row["UGDS_ASIAN"] / row["UGDS"]
-    races["northnative"] = row["UGDS_AIAN"] / row["UGDS"]
-    races["southnative"] = row["UGDS_NHPI"] / row["UGDS"]
-    races["multi"] = row["UGDS_2MOR"] / row["UGDS"]
-    races["nonresident"] = row["UGDS_NRA"] / row["UGDS"]
-    races["unknown"] = row["UGDS_UNKN"] / row["UGDS"]
-    newRow["racepercent"] = races
+    races["white"] = row["UGDS_WHITE"]
+    races["black"] = row["UGDS_BLACK"]
+    races["hispanic"] = row["UGDS_HISP"]
+    races["asian"] = row["UGDS_ASIAN"]
+    races["northnative"] = row["UGDS_AIAN"]
+    races["southnative"] = row["UGDS_NHPI"]
+    races["multi"] = row["UGDS_2MOR"]
+    races["nonresident"] = row["UGDS_NRA"] 
+    races["unknown"] = row["UGDS_UNKN"]
+    row["racepercent"] = races
     tuition = {}
     if row["NPT4_PUB"] != "NULL":
         tuition["0"] = row["NPT4_PUB"]
@@ -48,7 +45,7 @@ def processRow(row):
         tuition["3"] = row["NPT43_PRIV"]
         tuition["4"] = row["NPT44_PRIV"]
         tuition["5"] = row["NPT45_PRIV"]
-    newRow["racepercent"] = tuition
+    row["racepercent"] = tuition
 
 
 if __name__ == '__main__':
