@@ -19,12 +19,14 @@ def results():
     return render_template("results.html", results=results)
 
 finalData = []
+names = []
 
 def initalize():
     with open('data.csv') as csvDataFile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             finalData.append(processRow(row))
+            names.append(row["INSTNM"])
 
 def processRow(row):
     races = {}
