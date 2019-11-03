@@ -30,7 +30,7 @@ def getPersonalData(json, college):
     elif json["degree"] == 2:
         college["comp"] = college['C150_L4']
         college["reten"] = college['RET_FTL4']
-    else
+    else:
         college["comp"] = college['C150_4']
         college["reten"] = college['RET_FT4']
 
