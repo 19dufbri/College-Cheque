@@ -5,7 +5,6 @@ from flask import Flask, render_template, url_for, request, jsonify
 import plotly.graph_objects as go
 
 
-
 app = Flask(__name__)
 
 finalData = []
