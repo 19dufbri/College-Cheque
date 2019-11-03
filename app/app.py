@@ -27,12 +27,14 @@ def getPersonalData(json, college):
     if json["degree"] == 1:
         college["comp"] = college['C150_L4']
         college["reten"] = college['RET_FTL4']
-    else if json["degree"] == 2:
+    elif json["degree"] == 2:
         college["comp"] = college['C150_L4']
         college["reten"] = college['RET_FTL4']
     else
         college["comp"] = college['C150_4']
         college["reten"] = college['RET_FT4']
+
+    college["net"] = college["tuition"][json["income"]]
 
     if college["TUITIONFEE_PROG"] == "NULL":
         if college["STABBR"] == json["state"]:
@@ -41,6 +43,8 @@ def getPersonalData(json, college):
             college["tuition"] = college["TUITIONFEE_OUT"]
     else:
         college["tuition"] = college["TUITIONFEE_PROG"];
+
+    college["pell"]
 
     return college
 
