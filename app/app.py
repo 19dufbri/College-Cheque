@@ -5,6 +5,7 @@ from flask import Flask, render_template, url_for, request, jsonify
 import matplotlib.pyplot as plt
 from io import StringIO
 from flask import jsonify
+import numpy as np
 
 app = Flask(__name__)
 
@@ -364,7 +365,7 @@ def makePie(dict):
         percents.append(v)
 
 
-    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
+    plt.pie(percents, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=1.35)
     # draw circle
     centre_circle = plt.Circle((0, 0), 0.70, fc='white')
     fig = plt.gcf()
@@ -378,11 +379,11 @@ def makePie(dict):
     buffer.seek(0)
     return base64.b64encode(buffer.read())
 
-def makeScatter():
-    labels = []
+def makeScatter(dict1, dict2):
+    avgCost = []
     percents = []
     colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
-    for k, v in dict.items():
+    for k, v in dict1.items():
         labels.append(k)
         percents.append(v)
 
