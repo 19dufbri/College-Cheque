@@ -4,6 +4,9 @@ import csv
 from flask import Flask, render_template, url_for
 app = Flask(__name__)
 
+finalData = []
+names = []
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -18,9 +21,6 @@ def results():
             results.append(college)
     return render_template("results.html", results=results)
 
-finalData = []
-names = []
-
 def initalize():
     with open('data.csv') as csvDataFile:
         reader = csv.DictReader(csvfile)
@@ -34,8 +34,8 @@ def processRow(row):
     races["Black"] = row["UGDS_BLACK"]
     races["Hispanic"] = row["UGDS_HISP"]
     races["Asian"] = row["UGDS_ASIAN"]
-    races["American Indian and Alaskan Native"] = row["UGDS_AIAN"]
-    races["Native Hawiian and Pacific Islander"] = row["UGDS_NHPI"]
+    races["Indian"] = row["UGDS_AIAN"]
+    races["Hawiian/PI"] = row["UGDS_NHPI"]
     races["Two or More"] = row["UGDS_2MOR"]
     races["Nonresident Alien"] = row["UGDS_NRA"] 
     races["Unkown"] = row["UGDS_UNKN"]
