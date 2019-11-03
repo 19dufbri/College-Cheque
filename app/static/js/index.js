@@ -78,7 +78,7 @@ $(function(ready) {
         //$("#collegeInputs").append('<input type="text" class="form-control collegeName" id="collegeName' + numColleges + '" aria-describedby="collegeName" placeholder="Enter college name">')
         $("#collegeName" + numColleges).css("display","inline-block");
         $('#submitBtn').addClass("disabled");
-        if(numColleges > 1) {
+        if(numColleges > 1 && numColleges < 10) {
             $('#remBtn').css('display', 'inline-block');
         } else if(numColleges >= 10) {
             $('#addBtn').css('display', 'none');
