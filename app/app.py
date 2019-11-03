@@ -333,15 +333,15 @@ def initalize():
 
 def processRow(row):
     races = {}
-    races["White"] = row["UGDS_WHITE"]
-    races["Black"] = row["UGDS_BLACK"]
-    races["Hispanic"] = row["UGDS_HISP"]
-    races["Asian"] = row["UGDS_ASIAN"]
-    races["Am. Indian"] = row["UGDS_AIAN"]
-    races["Hawiian/PI"] = row["UGDS_NHPI"]
-    races["Two or more"] = row["UGDS_2MOR"]
-    races["Non-resident"] = row["UGDS_NRA"] 
-    races["Unknown"] = row["UGDS_UNKN"]
+    races["White"] = getFloat(row, "UGDS_WHITE")
+    races["Black"] = getFloat(row, "UGDS_BLACK")
+    races["Hispanic"] = getFloat(row, "UGDS_HISP")
+    races["Asian"] = getFloat(row, "UGDS_ASIAN")
+    races["Am. Indian"] = getFloat(row, "UGDS_AIAN")
+    races["Hawiian/PI"] = getFloat(row, "UGDS_NHPI")
+    races["Two or more"] = getFloat(row, "UGDS_2MOR")
+    races["Non-resident"] = getFloat(row, "UGDS_NRA") 
+    races["Unknown"] = getFloat(row, "UGDS_UNKN")
     row["racepercent"] = races
     tuition = {}
     if row["NPT4_PUB"] != "NULL":
