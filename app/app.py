@@ -1,7 +1,10 @@
-import plotly.graph_objects as plotly
 import base64
 import csv
 from flask import Flask, render_template, url_for, request, jsonify
+import plotly.graph_objects as go
+
+
+
 app = Flask(__name__)
 
 finalData = []
@@ -351,13 +354,15 @@ def makePie(percents):
         keys.append(key)
         props.append(percents[key])
     
-    data = plotly.Figure(data = [plotly.Pie(labels = keys, values = props, hole = .375, sort = False)])
+    data = go.Figure(data = [go.Pie(labels = keys, values = props, hole = .375, sort = False)])
     colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
     data.update_traces(direction = "clockwise", textinfo = "percent", textfont_size = 20, marker = dict(colors = colors))
     data.update_layout(autosize = False, width = 650, height = 650, legend = dict(y = .5, font = dict(size = 20)))
-    data.update_layout(margin = plotly.layout.Margin(l = 0, r = 0, t = 0, b = 0), paper_bgcolor = "#fbfaf6")
+    data.update_layout(margin = go.layout.Margin(l = 0, r = 0, t = 0, b = 0), paper_bgcolor = "#fbfaf6")
     chart = base64.b64encode(data.to_image(format = "png"))
     return chart
 
 if __name__ == '__main__':
     app.run(debug=False)
+else:
+    application = app
