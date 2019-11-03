@@ -1,7 +1,7 @@
 import plotly.graph_objects as plotly
 import base64
 import csv
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, jsonify
 app = Flask(__name__)
 
 finalData = []
