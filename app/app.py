@@ -2,7 +2,8 @@ import base64
 import csv
 import json
 from flask import Flask, render_template, url_for, request, jsonify
-import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+from io import StringIO
 
 
 app = Flask(__name__)
@@ -347,20 +348,19 @@ def processRow(row):
     row["tuition"] = tuition
     return row
 
-def makePie(percents):
-    keys = []
-    props = []
-    for key in percents:
-        keys.append(key)
-        props.append(percents[key])
-    
-    data = go.Figure(data = [go.Pie(labels = keys, values = props, hole = .375, sort = False)])
+def makePie(dict):
+    labels = []
+    percents = []
     colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
-    data.update_traces(direction = "clockwise", textinfo = "percent", textfont_size = 20, marker = dict(colors = colors))
-    data.update_layout(autosize = False, width = 650, height = 650, legend = dict(y = .5, font = dict(size = 20)))
-    data.update_layout(margin = go.layout.Margin(l = 0, r = 0, t = 0, b = 0), paper_bgcolor = "#fbfaf6")
-    chart = base64.b64encode(data.to_image(format = "png"))
-    return chart
+    for k, v in dict.items():
+        labels.append(k)
+        percents.append(v)
+
+    plt.pie(percents, labels=labels, colors=colors, startangle=90,frame=True)
+    buffer = StringIO();
+    plt.savefig(buffer, format="jpg")
+    buffer.seek(0)
+    return base64.b64encode(buffer.read())
 
 initalize()
 
