@@ -3,8 +3,7 @@ let  numColleges = 1;
 $(function(ready) {
 
     function getCookie(c_name) {
-        if (document.cookie.length>0)
-          {
+        if (document.cookie.length>0) {
           c_start=document.cookie.indexOf(c_name + "=");
           if (c_start!=-1)
             {
@@ -13,7 +12,10 @@ $(function(ready) {
             if (c_end==-1) c_end=document.cookie.length;
             return unescape(document.cookie.substring(c_start,c_end));
             }
-          }
+        } else {
+            $(".progress-bar").css('width', '0%');
+        }
+        $(".progress-bar").css('width', '0%');
         return "";
     }
 
