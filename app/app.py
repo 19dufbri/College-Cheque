@@ -4,6 +4,9 @@ import csv
 from flask import Flask, render_template, url_for, request, jsonify
 app = Flask(__name__)
 
+finalData = []
+names = []
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -18,8 +21,6 @@ def results():
             results.append(college)
     return render_template("results.html", results=results)
 
-finalData = []
-
 def initalize():
     with open('data.csv') as csvDataFile:
         reader = csv.DictReader(csvfile)
@@ -33,11 +34,11 @@ def processRow(row):
     races["Black"] = row["UGDS_BLACK"]
     races["Hispanic"] = row["UGDS_HISP"]
     races["Asian"] = row["UGDS_ASIAN"]
-    races["American Indian and Alaskan Native"] = row["UGDS_AIAN"]
-    races["Native Hawiian and Pacific Islander"] = row["UGDS_NHPI"]
-    races["Two or More"] = row["UGDS_2MOR"]
-    races["Nonresident Alien"] = row["UGDS_NRA"] 
-    races["Unkown"] = row["UGDS_UNKN"]
+    races["Am. Indian"] = row["UGDS_AIAN"]
+    races["Hawiian/PI"] = row["UGDS_NHPI"]
+    races["Two or more"] = row["UGDS_2MOR"]
+    races["Non-resident"] = row["UGDS_NRA"] 
+    races["Unknown"] = row["UGDS_UNKN"]
     row["racepercent"] = races
     tuition = {}
     if row["NPT4_PUB"] != "NULL":
@@ -63,8 +64,13 @@ def makePie(percents):
     for key in percents:
         keys.append(key)
         props.append(percents[key])
-    data = plotly.Figure(data=[plotly.Pie(labels=keys, values=props)])
-    chart = base64.b64encode(data.to_image(format="png"))
+    
+    data = plotly.Figure(data = [plotly.Pie(labels = keys, values = props, hole = .375, sort = False)])
+    colors = ["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9"]
+    data.update_traces(direction = "clockwise", textinfo = "percent", textfont_size = 20, marker = dict(colors = colors))
+    data.update_layout(autosize = False, width = 650, height = 650, legend = dict(y = .5, font = dict(size = 20)))
+    data.update_layout(margin = plotly.layout.Margin(l = 0, r = 0, t = 0, b = 0), paper_bgcolor = "#fbfaf6")
+    chart = base64.b64encode(data.to_image(format = "png"))
     return chart
 
 if __name__ == '__main__':
