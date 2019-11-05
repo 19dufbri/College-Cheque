@@ -326,7 +326,7 @@ def getPersonalData(json, college):
 
 
 def initalize():
-    with open('data.csv') as csvfile:
+    with open('app/data.csv') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             finalData.append(processRow(row))
